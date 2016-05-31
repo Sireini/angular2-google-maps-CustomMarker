@@ -44,16 +44,23 @@ var GoogleMapComponent = (function () {
         };
     }
     GoogleMapComponent.prototype.updateDiv = function (location) {
+        var _this = this;
         this.selectedLocation = location;
         this.isClicked = true;
+        this.ID = this.selectedLocation.id;
+        this.content = this.selectedLocation.content;
+        console.log(this.ID);
         $(function () {
+            $('.gm-style-iw').parent().append('<div class="test"><span class="ID">' + _this.ID + '</span><span class="content-infowindow">' + _this.content + '</span></div>');
             setTimeout(function () {
                 $('.result-number').css('color', 'red');
+                // $('.infoWindow').css('top', lat)
             }, 0);
         });
     };
     GoogleMapComponent.prototype.mapClicked = function ($event) {
         this.isClicked = false;
+        $('.gm-style-iw').next('div').find('img').click();
     };
     GoogleMapComponent = __decorate([
         core_1.Component({

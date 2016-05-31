@@ -10,8 +10,12 @@
 
 <section *ngIf="isClicked" id="ethiopian-desert">
     <div *ngIf="selectedLocation" class="result-number">
-      {{ selectedLocation.id }}
+        {{ selectedLocation.id }}
     </div>
 </section>
+
+<div *ngIf="isClicked" class="infoWindow">
+    <p>{{ selectedLocation.id }} {{ selectedLocation.content }}</p>
+</div>
 
 <!--[iconUrl]="location.iconUrl"-->

@@ -1,0 +1,21 @@
+.test {
+    width: 210px;
+    height: 36px;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    position: relative;
+    z-index: 10000;
+}
+
+.test::after {
+    content: url('../images/small_triangle.png');
+}
+
+.ID {
+    margin-left: 20px;
+}
+
+.content-infowindow {
+    margin-left: 5px;
+}

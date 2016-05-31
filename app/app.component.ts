@@ -1,7 +1,12 @@
 import {Component} from '@angular/core';
 
-import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapTypeId, MapTypeControlOptions, ImageMapTypeOptions, ImageMapTypeCoord} from 'angular2-google-maps';
-
+import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, 
+        MapTypeId, 
+        MapTypeControlOptions, 
+        ImageMapTypeOptions, 
+        ImageMapTypeCoord, 
+        GoogleMapsAPIWrapper} from 'angular2-google-maps';
+        
 export var google: any;
 
 @Component({
@@ -18,6 +23,8 @@ export class GoogleMapComponent {
   maptype: string = 'Beeksebergen';
   isClicked: boolean;
   selectedLocation: Location;
+  ID: string;
+  content: string;
   
   locations: marker[] = [
     {id: '1',  lat: 51.5239935252832,    lng:  5.137663903579778,   content: 'Kids Jungalow (5p)',    iconUrl: 'img/marker.png'},
@@ -54,16 +61,24 @@ export class GoogleMapComponent {
   updateDiv(location: Location) {
     this.selectedLocation = location;
     this.isClicked = true;
+    this.ID = this.selectedLocation.id;
+    this.content = this.selectedLocation.content;
+
+    console.log(this.ID)
     
-    $(function() {
+   $(() => {
+        $('.gm-style-iw').parent().append('<div class="test"><span class="ID">'+ this.ID + '</span><span class="content-infowindow">' + this.content + '</span></div>');
+      
         setTimeout(function() {
             $('.result-number').css('color', 'red');
+            // $('.infoWindow').css('top', lat)
         }, 0);
     });
 }
 
   mapClicked($event: MouseEvent) {
         this.isClicked = false;
+        $('.gm-style-iw').next('div').find('img').click();
     }
   
 }
