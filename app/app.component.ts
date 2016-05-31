@@ -61,10 +61,8 @@ export class GoogleMapComponent {
   updateDiv(location: Location) {
     this.selectedLocation = location;
     this.isClicked = true;
-    this.ID = this.selectedLocation.id;
-    this.content = this.selectedLocation.content;
-
-    console.log(this.ID)
+    this.ID = location.id;
+    this.content = location.content;
     
    $(() => {
         $('.gm-style-iw').parent().append(
