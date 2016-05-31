@@ -67,7 +67,12 @@ export class GoogleMapComponent {
     console.log(this.ID)
     
    $(() => {
-        $('.gm-style-iw').parent().append('<div class="test"><span class="ID">'+ this.ID + '</span><span class="content-infowindow">' + this.content + '</span></div>');
+        $('.gm-style-iw').parent().append(
+          '<div class="test">'+
+            '<span class="content">'+
+              '<span class="ID">'+ this.ID + '</span>'+
+              '<span class="content-infowindow">' + this.content + '</span>'+
+            '</span></div>');
       
         setTimeout(function() {
             $('.result-number').css('color', 'red');

@@ -1,19 +1,32 @@
 .test {
-    width: 210px;
+    width: auto;
     height: 36px;
-    background-color: red;
+    background-color: #AA3131;
     color: white;
+    border: 3px solid white;
     font-size: 15px;
     position: relative;
     z-index: 10000;
 }
 
 .test::after {
-    content: url('../images/small_triangle.png');
+    content: url('../img/tooltip-point.png');
+    position: absolute;
+    bottom: -15px;
+    left: 30%;
+    display: block;
+    width: 70px;
+    height: 21px;
+    background-repeat: no-repeat;
+}
+
+.content {
+    position: absolute;
+    top: 10px;
 }
 
 .ID {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 .content-infowindow {
