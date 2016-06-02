@@ -49,7 +49,8 @@ export class GoogleMapsAPIWrapper {
       Promise<mapTypes.OverlayView> {
         return this._map.then((map: mapTypes.GoogleMap) => {
           console.log(options);
-          var overlay = new mapTypes.OverlayViewBla(options, google);
+          var IDOverlay = options.IDOverlay;
+          var overlay = new mapTypes.OverlayViewBla(options, google, IDOverlay);
           var overlayView = overlay.getOverlayView();
           overlayView.setMap(map);
           

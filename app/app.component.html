@@ -1,8 +1,9 @@
 
 
-<sebm-google-map (mapClick)="mapClicked($event, infowindow)" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="maptype" [mapTypeControlOptions]="mapTypeControlOptions">
+<sebm-google-map (mapClick)="mapClicked($event)" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="maptype" [mapTypeControlOptions]="mapTypeControlOptions">
     <sebm-google-image-map-type [mapLayerId]="'Beeksebergen'" [options]=imageMapOptions>
-        <sebm-google-map-overlay-view *ngFor="let location of locations" [latitude]="location.lat" [longitude]="location.lng">
+        <sebm-google-map-overlay-view *ngFor="let location of locations" [latitude]="location.lat" [longitude]="location.lng" [IDOverlay]="location.id" (markerClick)="updateDiv(location, infowindow)">
+            <span> {{location.id}}</span>
             <sebm-google-map-info-window #infowindow  [disableAutoPan]="true">{{ location.id }} {{ location.content }}</sebm-google-map-info-window>
         </sebm-google-map-overlay-view>
         <!--<sebm-google-map-marker *ngFor="let location of locations" [latitude]="location.lat" [longitude]="location.lng" [label]="location.id" (markerClick)="updateDiv(location, infowindow)">

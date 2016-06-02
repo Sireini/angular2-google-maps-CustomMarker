@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var angular2_google_maps_1 = require('angular2-google-maps');
+var angular2_google_maps_1 = require('./vendor/angular2-google-maps');
 var GoogleMapComponent = (function () {
     function GoogleMapComponent() {
         this.lat = 51.522081;

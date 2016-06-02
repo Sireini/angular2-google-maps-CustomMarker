@@ -37,6 +37,7 @@ export interface MarkerOptions {
   label?: string|MarkerLabel;
   draggable?: boolean;
   icon?: string;
+  IDOverlay?: string;
 }
 
 export interface MarkerLabel {
@@ -141,11 +142,13 @@ export interface ImageMapTypeOptions {
 
 export class OverlayViewBla {
   public latlng : any;
-  id: number;
+  IDOverlay: string;
   overlayView: any;
   
-  constructor(options: any, google: any) {
+  constructor(options: any, google: any , IDOverlay: string) {
     this.latlng = new google.maps.LatLng(options.position.lat, options.position.lng);
+    
+    console.log(options);
     
     this.overlayView = new google.maps.OverlayView();
     
@@ -163,25 +166,31 @@ export class OverlayViewBla {
         div.style.cursor = 'pointer';
         div.style.width = '20px';
         div.style.height = '20px';
-        div.style.background = 'blue';
+        div.style.borderRadius =  '50%';
+        div.style.color = 'white';
+        div.style.background = 'black';
+        
+        console.log(self.IDOverlay)
+        
+        div.innerHTML = '<span class="number-id">9</span>';
         
         // if (typeof(self.id) !== 'undefined') {
         //   div.dataset.marker_id = self.id;
         // }
 
         google.maps.event.addDomListener(div, "click", function(event: any) {
-          google.maps.event.trigger(self, "click");
+            google.maps.event.trigger(self, "click");
         });
         
         var panes = this.getPanes();
-        panes.overlayImage.appendChild(div);
-      }
+            panes.overlayImage.appendChild(div);
+        }
       
       var point = this.getProjection().fromLatLngToDivPixel(self.latlng);
       
       if (point) {
-        div.style.left = (point.x - 10) + 'px';
-        div.style.top = (point.y) + 'px';
+          div.style.left = (point.x - 10) + 'px';
+          div.style.top = (point.y) + 'px';
       }
     }
   }

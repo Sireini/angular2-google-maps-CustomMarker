@@ -96,7 +96,6 @@ export class SebmGoogleMapMarker implements OnDestroy,
 
   /** @internal */
   ngOnChanges(changes: {[key: string]: SimpleChange}) {
-    console.log("CHANGE MARKER");
     if (typeof this.latitude !== 'number' || typeof this.longitude !== 'number') {
       return;
     }

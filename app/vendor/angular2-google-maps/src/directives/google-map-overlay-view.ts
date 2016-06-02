@@ -6,7 +6,7 @@ import {OverlayViewManager} from '../services/overlay-view-manager';
 //import {MarkerManager} from '../services/marker-manager';
 import {SebmGoogleMapInfoWindow} from './google-map-info-window';
 
-let markerId = 0;
+let markerId = 1;
 
 /**
  * SebmGoogleMapMarker renders a map marker inside a {@link SebmGoogleMap}.
@@ -51,6 +51,7 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
    * The longitude position of the marker.
    */
   longitude: number;
+  
 
 //   /**
 //    * The title of the marker.
@@ -85,14 +86,15 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
   @ContentChild(SebmGoogleMapInfoWindow) private _infoWindow: SebmGoogleMapInfoWindow;
 
   private _overviewAddedToManager: boolean = false;
-  private _id: string;
+  private IDOverlay: string;
 
   constructor(private _overlayViewManager: OverlayViewManager) {
-      this._id = (markerId++).toString();
+      this.IDOverlay = (markerId++).toString();
     }
 
   /* @internal */
   ngAfterContentInit() {
+    console.log('NGAFTERCONTENTINIT')
         if (this._infoWindow != null) {
         this._infoWindow.maxWidth = 100;
         }
@@ -103,6 +105,7 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
     if (typeof this.latitude !== 'number' || typeof this.longitude !== 'number') {
       return;
     }
+    
     
     if (!this._overviewAddedToManager) {
       this._overlayViewManager.addOverlayView(this);
@@ -134,10 +137,10 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
   private _addEventListeners() {
     this._overlayViewManager.createEventObservable('click', this).subscribe(() => {
     console.log('click');
-    //   if (this._infoWindow != null) {
-    //     this._infoWindow.open();
-    //   }
-    //   this.markerClick.next(null);
+      if (this._infoWindow != null) {
+        this._infoWindow.open();
+      }
+      this.markerClick.next(null);
     });
     this._overlayViewManager.createEventObservable<mapTypes.MouseEvent>('dragend', this)
         .subscribe((e: mapTypes.MouseEvent) => {

@@ -58,9 +58,10 @@ export class OverlayViewManager {
   // }
 
   addOverlayView(overlayView: SebmGoogleMapOverlayView) {
-   console.log(overlayView.latitude);
+   console.log(overlayView);
     const overlayViewPromise = this._mapsWrapper.createOverlayView({
       position: {lat: overlayView.latitude, lng: overlayView.longitude},
+      
     });
     
     this._overlayViews.set(overlayView, overlayViewPromise);

@@ -9,7 +9,7 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES,
         SebmGoogleMapOverlayView,
         SebmGoogleMapInfoWindow, 
         ImageMapTypeCoord, 
-        GoogleMapsAPIWrapper} from 'angular2-google-maps';
+        GoogleMapsAPIWrapper} from './vendor/angular2-google-maps';
         
 export var google: any;
 
@@ -76,7 +76,7 @@ export class GoogleMapComponent {
             '<span class="ID">'+ this.ID + '</span>'+
             '<span class="content-infowindow">' + this.content + '</span>'+
           '</span>'+
-        '</div>');    
+        '</div>');      
     });
              
     if (this.lastClicked && this.lastClicked !== infoWindow){
