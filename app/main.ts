@@ -1,7 +1,7 @@
 import {provide} from '@angular/core';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 
-import {ANGULAR2_GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig} from 'angular2-google-maps';
+import {ANGULAR2_GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig} from './vendor/angular2-google-maps';
 
 import {GoogleMapComponent} from './app.component';
 

@@ -34,7 +34,7 @@ var GoogleMapComponent = (function () {
         };
         this.imageMapOptions = {
             getTileUrl: function (coord, zoom) {
-                return "http://www.sylvanreinieren.com/tiles/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+                return "http://www.sylvanreinieren.com/tiles/" + zoom + "/" + coord.x + "/" + coord.y + ".jpg";
             },
             tileSize: { height: 256, width: 256 },
             maxZoom: 18,
@@ -43,30 +43,45 @@ var GoogleMapComponent = (function () {
             name: 'Beeksebergen'
         };
     }
-    GoogleMapComponent.prototype.updateDiv = function (location) {
+    GoogleMapComponent.prototype.updateDiv = function (location, infoWindow) {
         var _this = this;
         this.selectedLocation = location;
         this.isClicked = true;
-        this.ID = this.selectedLocation.id;
-        this.content = this.selectedLocation.content;
-        console.log(this.ID);
+        this.ID = location.id;
+        this.content = location.content;
         $(function () {
-            $('.gm-style-iw').parent().append('<div class="test"><span class="ID">' + _this.ID + '</span><span class="content-infowindow">' + _this.content + '</span></div>');
-            setTimeout(function () {
-                $('.result-number').css('color', 'red');
-                // $('.infoWindow').css('top', lat)
-            }, 0);
+            $('.gm-style-iw').parent().append('<div class="test">' +
+                '<span class="content">' +
+                '<span class="ID">' + _this.ID + '</span>' +
+                '<span class="content-infowindow">' + _this.content + '</span>' +
+                '</span>' +
+                '</div>');
         });
+        if (this.lastClicked && this.lastClicked !== infoWindow) {
+            this.lastClicked.close();
+        }
+        this.lastClicked = infoWindow;
+        setTimeout(function () {
+            //     $('.result-number').css('color', 'red');
+            //     $('div.sebm-google-map-info-window-content').find('#0').css('color', 'blue')
+        }, 10);
     };
     GoogleMapComponent.prototype.mapClicked = function ($event) {
         this.isClicked = false;
-        $('.gm-style-iw').next('div').find('img').click();
+        if (this.lastClicked) {
+            this.lastClicked.close();
+            this.lastClicked = null;
+        }
+        // if (this.lastClicked && this.lastClicked !== infoWindow){
+        //      this.lastClicked.close();
+        // }
+        // this.lastClicked = infoWindow;
     };
     GoogleMapComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'map',
-            directives: [angular2_google_maps_1.ANGULAR2_GOOGLE_MAPS_DIRECTIVES],
+            directives: [angular2_google_maps_1.ANGULAR2_GOOGLE_MAPS_DIRECTIVES, angular2_google_maps_1.SebmGoogleMap, angular2_google_maps_1.SebmGoogleMapMarker, angular2_google_maps_1.SebmGoogleMapOverlayView],
             templateUrl: 'app.component.html',
             styleUrls: ['app.component.css']
         }), 

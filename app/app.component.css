@@ -10,11 +10,3 @@
   background-color: red;
   border: 1px solid white;
 }
-
-.test {
-      width: 180px;
-    height: 36px;
-    background-color: red;
-    position: relative;
-    z-index: 10000;
-}
