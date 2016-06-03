@@ -56,12 +56,14 @@ export class OverlayViewManager {
   // updateIcon(overlayView: SebmGoogleMapOverlayView): Promise<void> {
   //   return this._overlayViews.get(overlayView).then((m: OverlayView) => m.setIcon(overlayView.iconUrl));
   // }
-
+  
+   
   addOverlayView(overlayView: SebmGoogleMapOverlayView) {
-   console.log(overlayView);
+    console.log(overlayView.objectId,'test');
+    
     const overlayViewPromise = this._mapsWrapper.createOverlayView({
-      position: {lat: overlayView.latitude, lng: overlayView.longitude},
-      
+        position: {lat: overlayView.latitude, lng: overlayView.longitude},
+        objectId: overlayView.objectId
     });
     
     this._overlayViews.set(overlayView, overlayViewPromise);

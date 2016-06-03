@@ -3,7 +3,6 @@ import {Directive, SimpleChange, OnDestroy, OnChanges, EventEmitter, ContentChil
 import {MouseEvent} from '../events';
 import * as mapTypes from '../services/google-maps-types';
 import {OverlayViewManager} from '../services/overlay-view-manager';
-//import {MarkerManager} from '../services/marker-manager';
 import {SebmGoogleMapInfoWindow} from './google-map-info-window';
 
 let markerId = 1;
@@ -26,8 +25,6 @@ let markerId = 1;
  * `],
  *  template: `
  *    <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
- *      <sebm-google-map-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
- *      </sebm-google-map-marker>
  *      <sebm-google-map-overlay-view [latitude]="lat" [longitude]="lng">
  *      </sebm-google-map-overlay-view>
  *    </sebm-google-map>
@@ -37,7 +34,7 @@ let markerId = 1;
  */
 @Directive({
   selector: 'sebm-google-map-overlay-view',
-  inputs: ['latitude', 'longitude'],
+  inputs: ['latitude', 'longitude', 'objectId'],
   outputs: ['markerClick', 'dragEnd']
 })
 export class SebmGoogleMapOverlayView implements OnDestroy,
@@ -52,16 +49,20 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
    */
   longitude: number;
   
+  /**
+   * The id of the marker object.
+   */
+  objectId: string;
 
-//   /**
-//    * The title of the marker.
-//    */
-//   title: string;
+  // /**
+  //  * The title of the marker.
+  //  */
+  // title: string;
 
-//   /**
-//    * The label (a single uppercase character) for the marker.
-//    */
-//   label: string;
+  // /**
+  //  * The label (a single uppercase character) for the marker.
+  //  */
+  // label: string;
 
 //   /**
 //    * If true, the marker can be dragged. Default value is false.
@@ -86,17 +87,17 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
   @ContentChild(SebmGoogleMapInfoWindow) private _infoWindow: SebmGoogleMapInfoWindow;
 
   private _overviewAddedToManager: boolean = false;
-  private IDOverlay: string;
+  private _id: string;
 
   constructor(private _overlayViewManager: OverlayViewManager) {
-      this.IDOverlay = (markerId++).toString();
+      this._id = (markerId++).toString();
     }
 
   /* @internal */
   ngAfterContentInit() {
     console.log('NGAFTERCONTENTINIT')
         if (this._infoWindow != null) {
-        this._infoWindow.maxWidth = 100;
+        // this._infoWindow.hostMarker = this;
         }
   }
 
@@ -108,11 +109,12 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
     
     
     if (!this._overviewAddedToManager) {
-      this._overlayViewManager.addOverlayView(this);
-      this._overviewAddedToManager = true;
-      this._addEventListeners();
-      return;
+        this._overlayViewManager.addOverlayView(this);
+        this._overviewAddedToManager = true;
+        this._addEventListeners();
+        return;
     }
+    
     // if (changes['latitude'] || changes['longitude']) {
     //   this._overlayViewManager.updateMarkerPosition(this);
     // }
@@ -138,7 +140,7 @@ export class SebmGoogleMapOverlayView implements OnDestroy,
     this._overlayViewManager.createEventObservable('click', this).subscribe(() => {
     console.log('click');
       if (this._infoWindow != null) {
-        this._infoWindow.open();
+          this._infoWindow.open();
       }
       this.markerClick.next(null);
     });

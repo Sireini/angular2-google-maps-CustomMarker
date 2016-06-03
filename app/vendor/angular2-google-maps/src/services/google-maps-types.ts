@@ -37,7 +37,7 @@ export interface MarkerOptions {
   label?: string|MarkerLabel;
   draggable?: boolean;
   icon?: string;
-  IDOverlay?: string;
+  objectId?: string;
 }
 
 export interface MarkerLabel {
@@ -63,6 +63,14 @@ export interface OverlayView {
   // getLabel(): MarkerLabel;
   addListener(eventType: string, fn: Function): void;
 }
+
+export interface OverlayViewOptions {
+  position: LatLng|LatLngLiteral;
+  map?: GoogleMap;
+  draggable?: boolean;
+  objectId?: string;
+}
+
 
 export interface LatLngLiteral {
   lat: number;
@@ -140,19 +148,20 @@ export interface ImageMapTypeOptions {
   getTileUrl(coord: ImageMapTypeCoord, zoom: number): string;
 }
 
-export class OverlayViewBla {
-  public latlng : any;
-  IDOverlay: string;
+export class OverlayViewClass {
+  public latlng : number;
   overlayView: any;
+  ID: string;
   
-  constructor(options: any, google: any , IDOverlay: string) {
+  constructor(options: any, google: any) {
     this.latlng = new google.maps.LatLng(options.position.lat, options.position.lng);
-    
-    console.log(options);
+    this.ID = options.objectId;
+    console.log(this.ID);
     
     this.overlayView = new google.maps.OverlayView();
     
     var self = this;
+       
     this.overlayView.draw = function() {
       var div = this.div;
       
@@ -169,10 +178,8 @@ export class OverlayViewBla {
         div.style.borderRadius =  '50%';
         div.style.color = 'white';
         div.style.background = 'black';
-        
-        console.log(self.IDOverlay)
-        
-        div.innerHTML = '<span class="number-id">9</span>';
+
+        div.innerHTML = '<span class="number-id">'+ self.ID +'</span>';
         
         // if (typeof(self.id) !== 'undefined') {
         //   div.dataset.marker_id = self.id;
@@ -180,6 +187,7 @@ export class OverlayViewBla {
 
         google.maps.event.addDomListener(div, "click", function(event: any) {
             google.maps.event.trigger(self, "click");
+            
         });
         
         var panes = this.getPanes();
@@ -190,7 +198,7 @@ export class OverlayViewBla {
       
       if (point) {
           div.style.left = (point.x - 10) + 'px';
-          div.style.top = (point.y) + 'px';
+          div.style.top = (point.y - 10) + 'px';
       }
     }
   }

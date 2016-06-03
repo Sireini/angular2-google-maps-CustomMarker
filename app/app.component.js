@@ -17,17 +17,17 @@ var GoogleMapComponent = (function () {
         this.zoom = 16;
         this.maptype = 'Beeksebergen';
         this.locations = [
-            { id: '1', lat: 51.5239935252832, lng: 5.137663903579778, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker.png' },
-            { id: '2', lat: 51.523853342911906, lng: 5.1377765563584035, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '3', lat: 51.5237298485607, lng: 5.137969675407476, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '4', lat: 51.52355628836575, lng: 5.138066234932012, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '5', lat: 51.52340275379578, lng: 5.138211074218816, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '6', lat: 51.523199152806626, lng: 5.138382735595769, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '7', lat: 51.5229955509073, lng: 5.138511481628484, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '8', lat: 51.52280529912936, lng: 5.138543668136663, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '9', lat: 51.523596340777075, lng: 5.138463201866216, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '700', lat: 51.523372714362736, lng: 5.1386992362595265, content: 'Kids Jungalow (5p)', iconUrl: 'img/marker2.png' },
-            { id: '101', lat: 51.52329594683302, lng: 5.138838711128301, content: 'Kids Jungalow Giraffe', iconUrl: 'img/marker2.png' }
+            { id: '1', lat: 51.5239935252832, lng: 5.137663903579778, content: 'Kids Jungalow (5p)' },
+            { id: '2', lat: 51.523853342911906, lng: 5.1377765563584035, content: 'Kids Jungalow (5p)' },
+            { id: '3', lat: 51.5237298485607, lng: 5.137969675407476, content: 'Kids Jungalow (5p)' },
+            { id: '4', lat: 51.52355628836575, lng: 5.138066234932012, content: 'Kids Jungalow (5p)' },
+            { id: '5', lat: 51.52340275379578, lng: 5.138211074218816, content: 'Kids Jungalow (5p)' },
+            { id: '6', lat: 51.523199152806626, lng: 5.138382735595769, content: 'Kids Jungalow (5p)' },
+            { id: '7', lat: 51.5229955509073, lng: 5.138511481628484, content: 'Kids Jungalow (5p)' },
+            { id: '8', lat: 51.52280529912936, lng: 5.138543668136663, content: 'Kids Jungalow (5p)' },
+            { id: '9', lat: 51.523596340777075, lng: 5.138463201866216, content: 'Kids Jungalow (5p)' },
+            { id: '700', lat: 51.523372714362736, lng: 5.1386992362595265, content: 'Kids Jungalow (5p)' },
+            { id: '101', lat: 51.52329594683302, lng: 5.138838711128301, content: 'Kids Jungalow Giraffe' }
         ];
         this.mapTypeControlOptions = {
             mapTypeIds: ['Beeksebergen']
@@ -45,6 +45,7 @@ var GoogleMapComponent = (function () {
     }
     GoogleMapComponent.prototype.updateDiv = function (location, infoWindow) {
         var _this = this;
+        console.log(location);
         this.selectedLocation = location;
         this.isClicked = true;
         this.ID = location.id;
@@ -64,7 +65,7 @@ var GoogleMapComponent = (function () {
         setTimeout(function () {
             //     $('.result-number').css('color', 'red');
             //     $('div.sebm-google-map-info-window-content').find('#0').css('color', 'blue')
-        }, 10);
+        }, 0);
     };
     GoogleMapComponent.prototype.mapClicked = function ($event) {
         this.isClicked = false;
@@ -72,10 +73,6 @@ var GoogleMapComponent = (function () {
             this.lastClicked.close();
             this.lastClicked = null;
         }
-        // if (this.lastClicked && this.lastClicked !== infoWindow){
-        //      this.lastClicked.close();
-        // }
-        // this.lastClicked = infoWindow;
     };
     GoogleMapComponent = __decorate([
         core_1.Component({

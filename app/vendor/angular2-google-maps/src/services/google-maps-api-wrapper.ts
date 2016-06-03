@@ -38,19 +38,19 @@ export class GoogleMapsAPIWrapper {
    * Creates a google map marker with the map context
    */
   createMarker(options: mapTypes.MarkerOptions = <mapTypes.MarkerOptions>{}):
-      Promise<mapTypes.Marker> {
-    return this._map.then((map: mapTypes.GoogleMap) => {
-      options.map = map;
-      return new google.maps.Marker(options);
+     Promise<mapTypes.Marker> {
+       return this._map.then((map: mapTypes.GoogleMap) => {
+        options.map = map;
+        
+        return new google.maps.Marker(options);
     });
   }
   
-  createOverlayView(options: mapTypes.MarkerOptions = <mapTypes.MarkerOptions>{}):
+  createOverlayView(options: mapTypes.OverlayViewOptions = <mapTypes.OverlayViewOptions>{}):
       Promise<mapTypes.OverlayView> {
         return this._map.then((map: mapTypes.GoogleMap) => {
           console.log(options);
-          var IDOverlay = options.IDOverlay;
-          var overlay = new mapTypes.OverlayViewBla(options, google, IDOverlay);
+          var overlay = new mapTypes.OverlayViewClass(options, google);
           var overlayView = overlay.getOverlayView();
           overlayView.setMap(map);
           
